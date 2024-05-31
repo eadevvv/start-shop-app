@@ -1,0 +1,34 @@
+<h2>Cart</h2>
+
+<p>
+  <a routerLink="/shipping">Shipping prices</a>
+</p>
+
+@for (cartItem of uniqueCartItems; track $index) {
+    <div class="cart-item">
+      <span>x{{ quantity[cartItem.id] }}</span>
+      <span>{{ cartItem.name }}</span>
+      <span>{{ cartItem.price * quantity[cartItem.id] | currency }}</span>
+    </div>
+  
+} @empty {
+  <p>Your cart is empty</p>
+}
+
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Name</label>
+    <input type="text" id="name" formControlName="name" />
+  </div>
+
+  <div>
+    <label for="address"></label>
+    <input type="text" id="address" formControlName="address" />
+  </div>
+
+  <button class="button" type="submit">Purchase</button>
+</form>
+
+@if (cartItems.length > 0) {
+  <button type="button" (click)="clearAll()">Clear</button>
+}

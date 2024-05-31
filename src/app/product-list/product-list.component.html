@@ -1,0 +1,18 @@
+<h2>Product List</h2>
+
+<div class="products">
+  @for (product of products; track $index) {
+    <div class="product">
+      <h3><a [routerLink]="['product', product.id]">{{ product.name }}</a></h3>
+      @if (product.description) {
+        <p>Description: {{ product.description }}</p>
+      }
+      
+      <button type="button" (click)="onShare()">Share</button>
+
+      <app-product-alerts [product]="product" (notify)="onNotify()"></app-product-alerts>
+    </div>
+  } @empty {
+    <p>There is no elements</p>
+  }
+</div>
